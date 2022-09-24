@@ -7,10 +7,10 @@
         @csrf
         <div class="form-group">
             <label>Username</label>
-            <input class="au-input au-input--full" type="text" name="name" placeholder="Username">
+            <input class="au-input au-input--full " type="text" name="name" placeholder="Username">
         </div>
         @error('name')
-        <small class=" text-danger">{{$message}}</small>
+        <small class="text-danger">{{$message}}</small>
         @enderror
 
         <div class="form-group">
