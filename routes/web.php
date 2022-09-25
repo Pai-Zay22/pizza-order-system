@@ -35,6 +35,7 @@ Route::middleware('admin_auth')->group(function(){
 
         //accoount info
         Route::get('accountInfoPage',[AdminController::class,'accountInfoPage'])->name('admin#accountInfoPage');
+        Route::get('accountEditPage',[AdminController::class,'accountEditPage'])->name('admin#accountEditPage');
     });
 });
 

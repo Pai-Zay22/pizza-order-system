@@ -11,7 +11,7 @@
                             <h3 class="text-center title-2">Account Info</h3>
                         </div>
                         <hr>
-                        <div class="row align-items-center">
+                        <div class="row  justify-content-center align-items-center">
                             <div class="col ml-3">
                                 @if (Auth::user()->image == null)
                                     <div class="image" style="border-radius: 50%;">
@@ -34,8 +34,12 @@
                                         class="mb-2  text-2xl text-bold">{{ Auth::user()->address }}</span></div>
                             </div>
                         </div>
-                        <div class=" text-center">
-                            <button class=" btn btn-dark text-white text-center"><i class=" mr-2 fa-solid fa-pen"></i>Edit Info</button>
+                        <div  class=" text-center">
+                            <a href="{{ route('admin#accountEditPage') }}">
+                                <button class=" btn btn-dark text-white text-center"><i
+                                        class=" mr-2 fa-solid fa-pen"></i>Edit Info</button>
+
+                            </a>
                         </div>
 
 

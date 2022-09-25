@@ -39,6 +39,11 @@ class AdminController extends Controller
         return view('admin.account.accountInfoPage');
     }
 
+    //direct account edit page
+    public function accountEditPage(){
+        return view('admin.account.accountEditPage');
+    }
+
     //password validation check
     private function passwordValidationCheck($req){
         Validator::make($req->all(),[
