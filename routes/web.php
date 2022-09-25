@@ -6,11 +6,13 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthenicationController;
 
-//login register
 
-Route::redirect('/', 'loginPage');
-Route::get('loginPage',[AuthenicationController::class,'loginPage'])->name('auth#loginPage');
-Route::get('registerPage',[AuthenicationController::class,'registerPage'])->name('auth#registerPage');
+Route::middleware('admin_auth')->group(function(){
+    //login register
+    Route::redirect('/', 'loginPage');
+    Route::get('loginPage',[AuthenicationController::class,'loginPage'])->name('auth#loginPage');
+    Route::get('registerPage',[AuthenicationController::class,'registerPage'])->name('auth#registerPage');
+});
 
 Route::middleware(['auth'])->group(function () {
 //dashboard
@@ -27,7 +29,7 @@ Route::middleware('admin_auth')->group(function(){
         Route::post('update',[CategoryController::class,'update'])->name('category#update');
     });
 
-    //admin->accont
+    //admin->account
     Route::prefix('admin')->group(function(){
         //password
         Route::get('changePasswordPage',[AdminController::class,'changePasswordPage'])->name('admin#changePasswordPage');
