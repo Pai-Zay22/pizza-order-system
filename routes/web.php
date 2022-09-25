@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthenicationController;
 
@@ -26,10 +27,14 @@ Route::middleware('admin_auth')->group(function(){
         Route::post('update',[CategoryController::class,'update'])->name('category#update');
     });
 
-    //admin->password
+    //admin->accont
     Route::prefix('admin')->group(function(){
-        Route::get('changePasswordPage',[AuthenicationController::class,'changePasswordPage'])->name('admin#changePasswordPage');
-        Route::post('changePassword',[AuthenicationController::class,'changePassword'])->name('admin#changePassword');
+        //password
+        Route::get('changePasswordPage',[AdminController::class,'changePasswordPage'])->name('admin#changePasswordPage');
+        Route::post('changePassword',[AdminController::class,'changePassword'])->name('admin#changePassword');
+
+        //accoount info
+        Route::get('accountInfoPage',[AdminController::class,'accountInfoPage'])->name('admin#accountInfoPage');
     });
 });
 
