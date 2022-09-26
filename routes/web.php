@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthenicationController;
 
@@ -39,6 +40,14 @@ Route::middleware('admin_auth')->group(function(){
         Route::get('accountInfoPage',[AdminController::class,'accountInfoPage'])->name('admin#accountInfoPage');
         Route::get('accountEditPage',[AdminController::class,'accountEditPage'])->name('admin#accountEditPage');
         Route::post('accountUpdate/{id}',[AdminController::class,'accountUpdate'])->name('admin#accountUpdate');
+
+    });
+
+    //admin->product
+    Route::prefix('product')->group(function(){
+       Route::get('pizzaListPage',[ProductController::class,'pizzalistPage'])->name('product#pizzaListPage');
+       Route::get('pizzaCreatePage',[ProductController::class,'pizzaCreatePage'])->name('product#pizzaCreatePage');
+       Route::post('pizzaCreate',[ProductController::class,'pizzaCreate'])->name('product#pizzaCreate');
     });
 });
 

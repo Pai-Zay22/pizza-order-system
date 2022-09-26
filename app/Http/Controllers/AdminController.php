@@ -96,7 +96,7 @@ class AdminController extends Controller
             'oldPassword' => 'required|min:5|max:10',
             'newPassword' => 'required|min:5|max:10',
             'confirmPassword' => 'required|min:5|max:10|same:newPassword',
-            'image' => 'mimes:jpg,jpeg,png',
+            'image' => 'mimes:jpg,jpeg,png,file',
         ])->validate();
     }
 }

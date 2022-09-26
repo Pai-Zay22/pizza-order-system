@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('description');
             $table->string('image');
             $table->string('price');
-            $table->string('view_count');
+            $table->string('waiting_time');
+            $table->string('view_count')->default(0);
             $table->timestamps();
         });
     }

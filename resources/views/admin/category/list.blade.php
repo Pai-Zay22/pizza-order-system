@@ -13,7 +13,7 @@
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
                             <div class="overview-wrap">
-                                <h2 class="title-1 text-primary">Category List</h2>
+                                <h2 class="title-1 text-black">Category List</h2>
 
                             </div>
                         </div>
@@ -48,10 +48,10 @@
                     {{-- Search bar total and serach key section  --}}
                     <div class=" my-3 d-flex  justify-content-between align-items-center">
                         <div>
-                            <span class=" text-primary">Total Categoty = {{ $categories->total() }}</span>
+                            <span class=" text-black">Total Categoty = {{ $categories->total() }}</span>
                         </div>
                         <div>
-                            <span class=" text-primary">Search Key = {{ request('key') }}</span>
+                            <span class=" text-black">Search Key = {{ request('key') }}</span>
                         </div>
                         <div>
                             <form action="{{ route('category#list') }}" method="GET">
