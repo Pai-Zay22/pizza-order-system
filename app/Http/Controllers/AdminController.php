@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -18,7 +19,7 @@ class AdminController extends Controller
 
     //admin change password
     public function changePassword(REQUEST $req){
-        //$this->passwordValidationCheck($req);
+        $this->passwordValidationCheck($req);
         $id = Auth::user()->id;
         $oldPw = User::select('password')->where('id',$id)->first();
         $dbHashValue = $oldPw->password;// get hash pw from db
@@ -44,12 +45,58 @@ class AdminController extends Controller
         return view('admin.account.accountEditPage');
     }
 
+    //admin account update
+    public function accountUpdate(Request $req,$id){
+        $this->userDataValidationCheck($req);
+        $data = $this->getUserData($req);
+
+        //for image
+        if($req->hasFile('image')){
+           $dbImage = User::where('id',$id)->first();
+           $dbImage = $dbImage->image; // get old image name from db
+
+           if($dbImage !== null){ // if old image exists delete it
+                Storage::delete('public/'.$dbImage);
+           }
+            $file = $req->file('image');
+           $imageName = uniqid().$file->getClientOriginalName();
+           $file->storeAs('public/',$imageName);//store in project
+           $data['image'] = $imageName;// store in db
+        }
+        User::where('id',$id)->update($data);
+        return redirect()->route('admin#accountInfoPage')->with(['updateSuccess' => 'Your account info updated Successfully!']);
+    }
+
+    //requesting user data
+    private function getUserData($req){
+        return[
+            'name' => $req->name,
+            'email' => $req->email,
+            'phone' => $req->phone,
+            'address' => $req->address,
+            'gender' => $req->gender,
+        ];
+    }
+    //user data validation check
+    private function userDataValidationCheck($req){
+        Validator::make($req->all(),[
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'gender' => 'required',
+
+        ])->validate();
+    }
+
+
     //password validation check
     private function passwordValidationCheck($req){
         Validator::make($req->all(),[
             'oldPassword' => 'required|min:5|max:10',
             'newPassword' => 'required|min:5|max:10',
             'confirmPassword' => 'required|min:5|max:10|same:newPassword',
+            'image' => 'mimes:jpg,jpeg,png',
         ])->validate();
     }
 }

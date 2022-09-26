@@ -75,7 +75,7 @@
                             <span class="form-header" action="" method="POST">
                                 <h4>Admin Dashboard</h4>
                             </span>
-                            <div class="header-button">
+                            <div class="header-button d-flex align-items-center">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
                                         <i class="zmdi zmdi-notifications"></i>
@@ -125,8 +125,8 @@
                                             </div>
                                         @else
                                             <div class="image">
-                                                <img src="{{ asset('admin/images/icon/avatar-01.jpg') }}"
-                                                    alt="John Doe" />
+                                                <img src="{{ asset('storage/'.Auth::user()->image)  }}"
+                                                 alt="John Doe" />
                                             </div>
                                         @endif
 
@@ -136,14 +136,14 @@
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 @if (Auth::user()->image == null)
-                                                    <div class="image"  style="border-radius: 50%;">
+                                                    <div class="image"  >
                                                         <img src="{{ asset('image/default_user.jpg') }}"
-                                                            alt="John Doe" />
+                                                        alt="John Doe" />
                                                     </div>
                                                 @else
                                                     <div class="image">
-                                                        <img src="{{ asset('admin/images/icon/avatar-01.jpg') }}"
-                                                            alt="John Doe" />
+                                                        <img src="{{ asset('storage/'.Auth::user()->image) }}"
+                                                         alt="John Doe" />
                                                     </div>
                                                 @endif
                                                 <div class="content">

@@ -4,6 +4,17 @@
     <div class="main-content">
 
         <div class="section__content section__content--p30">
+
+            {{-- account successfully updated message --}}
+            <div class=" col-6 offset-3">
+                @if (session('updateSuccess'))
+                    <div class="alert alert-success alert-dismissible fade show  p-3" role="alert">
+                        <span class=" text-bold">{{ session('updateSuccess') }}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+            </div>
+
             <div class="col-8 offset-2">
                 <div class="card">
                     <div class="card-body">
@@ -19,22 +30,27 @@
                                     </div>
                                 @else
                                     <div class="image">
-                                        <img src="{{ asset('admin/images/icon/avatar-01.jpg') }}" alt="John Doe" />
+                                        <img src="{{ asset('storage/'.Auth::user()->image) }}" alt="{{Auth::user()->name}}"style=" width:250px; border-radius:10px;"/>
                                     </div>
                                 @endif
                             </div>
                             <div class="col mr-5">
-                                <div class=" mb-2"><i class=" mr-2 fa-solid fa-user "></i><span
-                                        class="mb-2  text-2xl text-bold">{{ Auth::user()->name }}</span></div>
-                                <div class=" mb-2"> <i class=" mr-2 fa-solid fa-envelope"></i><span
-                                        class="mb-2  text-2xl text-bold">{{ Auth::user()->email }}</span></div>
-                                <div class=" mb-2"><i class=" mr-2 fa-solid fa-phone"></i><span
-                                        class="mb-2  text-2xl text-bold">{{ Auth::user()->phone }}</span></div>
-                                <div class=" mb-2"><i class=" mr-2 fa-solid fa-location-dot"></i><span
-                                        class="mb-2  text-2xl text-bold">{{ Auth::user()->address }}</span></div>
+                                <div class=" mb-3"><i class=" mr-2 fa-solid fa-user "></i><span
+                                        class=" text-2xl text-bold">{{ Auth::user()->name }}</span></div>
+                                <div class=" mb-3"> <i class=" mr-2 fa-solid fa-envelope"></i><span
+                                        class=" text-2xl text-bold">{{ Auth::user()->email }}</span></div>
+                                <div class=" mb-3"><i class=" mr-2 fa-solid fa-phone"></i><span
+                                        class=" text-2xl text-bold">{{ Auth::user()->phone }}</span></div>
+                                <div class=" mb-3"><i class=" mr-2 fa-solid fa-location-dot"></i><span
+                                        class=" text-2xl text-bold">{{ Auth::user()->address }}</span></div>
+                                <div class=" mb-3"><i class=" mr-2 fa-solid fa-calendar-days"></i><span
+                                        class=" text-2xl text-bold">{{ Auth::user()->created_at->format('j/F/Y') }}</span>
+                                </div>
+                                <div class=" mb-3"><i class=" mr-2 fa-solid fa-venus"></i><span
+                                        class=" text-2xl text-bold">{{ Auth::user()->gender }}</span></div>
                             </div>
                         </div>
-                        <div  class=" text-center">
+                        <div class=" text-center">
                             <a href="{{ route('admin#accountEditPage') }}">
                                 <button class=" btn btn-dark text-white text-center"><i
                                         class=" mr-2 fa-solid fa-pen"></i>Edit Info</button>

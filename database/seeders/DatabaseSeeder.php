@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             'address' => 'NaungCho',
             'phone' => '09952511357',
             'role' => 'admin',
+            'gender' => 'male',
             'password' => Hash::make('admin123'),
        ]);
        User::create([
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
         'address' => 'NaungCho',
         'role' => 'admin',
         'phone' => '095278267',
+        'gender' => 'male',
         'password' => Hash::make('htinlin123'),
    ]);
 }

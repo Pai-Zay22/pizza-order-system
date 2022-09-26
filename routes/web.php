@@ -35,9 +35,10 @@ Route::middleware('admin_auth')->group(function(){
         Route::get('changePasswordPage',[AdminController::class,'changePasswordPage'])->name('admin#changePasswordPage');
         Route::post('changePassword',[AdminController::class,'changePassword'])->name('admin#changePassword');
 
-        //accoount info
+        //account info
         Route::get('accountInfoPage',[AdminController::class,'accountInfoPage'])->name('admin#accountInfoPage');
         Route::get('accountEditPage',[AdminController::class,'accountEditPage'])->name('admin#accountEditPage');
+        Route::post('accountUpdate/{id}',[AdminController::class,'accountUpdate'])->name('admin#accountUpdate');
     });
 });
 
