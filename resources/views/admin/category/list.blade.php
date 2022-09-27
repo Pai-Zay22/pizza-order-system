@@ -37,7 +37,7 @@
                         </div>
                     @endif
 
-                    {{-- show delete message --}}
+                    {{-- show update message --}}
                     @if (session('categoryUpdate'))
                         <div class="alert alert-success alert-dismissible fade show col-4 offset-8" role="alert">
                             <span class=" text-bold ">{{ session('categoryUpdate') }}</span>

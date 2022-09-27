@@ -11,7 +11,11 @@ class ProductController extends Controller
 {
     //direct pizza list page
     public function pizzaListPage(){
-        $pizzas = Product::orderby('id','desc')->paginate(3);
+
+        $pizzas = Product::when(request('key'),function($query){
+                    $query->where('name','like','%'.request('key').'%');
+                })->orderby('id','desc')->paginate(3);
+        $pizzas->appends(request()->all());
         return view('admin.product.pizzaListPage',compact('pizzas'));
     }
 
@@ -31,6 +35,18 @@ class ProductController extends Controller
         $data['image'] = $imageName;//store in db
         Product::create($data);
         return redirect()->route('product#pizzaListPage');
+    }
+
+    //pizza delete
+    public function pizzaDelete($id){
+        Product::where('id',$id)->delete();
+        return redirect()->route('product#pizzaListPage')->with(['pizzaDelete'=>'Pizza list has deleted successfully!']);
+    }
+
+    //direct pizza info page
+    public function pizzaInfo($id){
+        $pizza = Product::where('id',$id)->first();
+        return view('admin.product.pizzaInfoPage',compact('pizza'));
     }
 
     //requesting pizza create data

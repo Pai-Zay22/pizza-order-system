@@ -48,6 +48,8 @@ Route::middleware('admin_auth')->group(function(){
        Route::get('pizzaListPage',[ProductController::class,'pizzalistPage'])->name('product#pizzaListPage');
        Route::get('pizzaCreatePage',[ProductController::class,'pizzaCreatePage'])->name('product#pizzaCreatePage');
        Route::post('pizzaCreate',[ProductController::class,'pizzaCreate'])->name('product#pizzaCreate');
+       Route::get('delete/{id}',[ProductController::class,'pizzaDelete'])->name('product#pizzaDelete');
+       Route::get('pizzaInfoPage/{id}',[ProductController::class,'pizzaInfo'])->name('product#pizzaInfoPage');
     });
 });
 
