@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -27,7 +28,7 @@ class ProductController extends Controller
 
     //creating pizza
     public function pizzaCreate(REQUEST $req){
-        $this->pizzaCreateValidationCheck($req);
+        $this->pizzaCreateValidationCheck($req,'create');
         $data = $this->pizzaCreateData($req);
         //for image
         $imageName = uniqid().$req->file('pizzaImage')->getClientOriginalName();
@@ -49,7 +50,32 @@ class ProductController extends Controller
         return view('admin.product.pizzaInfoPage',compact('pizza'));
     }
 
-    //requesting pizza create data
+    //direct pizza update page
+    public function pizzaUpdatePage($id){
+        $category = Category::get();
+        $pizza = Product::where('id',$id)->first();
+
+        return view('admin.product.pizzaUpdatePage',compact('pizza','category'));
+    }
+
+    //pizza update process
+    public function pizzaUpdate($id,REQUEST $req){
+        $this->pizzaCreateValidationCheck($req,'update');
+        $data = $this->pizzaCreateData($req);
+        // for image
+        $dbImage = Product::where('id',$id)->first();
+        $dbImage = $dbImage->image;
+        if($dbImage !=null){ //deleting old image if exists
+            Storage::delete('public'.$dbImage);
+            $imageName = uniqid().$req->file('pizzaImage')->getClientOriginalName();
+            $req->file('pizzaImage')->storeAs('public/',$imageName);//store in project
+            $data['image'] = $imageName;//store in db
+            Product::where('id',$id)->update($data);
+            return redirect()->route('product#pizzaListPage');
+        }
+    }
+
+    //requesting pizza data
     private function pizzaCreateData($req){
         return [
             'name' => $req->pizzaName,
@@ -64,14 +90,16 @@ class ProductController extends Controller
 
 
     //checking validation
-    private function pizzaCreateValidationCheck($req){
-        Validator::make($req->all(),[
-            'pizzaName' => 'required|unique:products,name|string',
+    private function pizzaCreateValidationCheck($req,$action){
+        $validationRules = [
+            'pizzaName' => 'required|unique:products,name,'.$req->pizzaId,
             'pizzaDescription' => 'required|min:10',
-            'pizzaImage' => 'required|mimes:png,jpg,jpeg,file',
             'pizzaCategory' => 'required',
             'pizzaPrice' => 'required',
             'waitingTime' => 'required',
-        ])->validate();
-    }
+        ];
+        $validationRules['pizzaImage'] = $action == 'create' ? 'mimes:png,jpg,jpeg|file|required': 'mimes:png,jpg,jpeg|file';
+        Validator::make($req->all(),$validationRules)->validate();
+
+}
 }

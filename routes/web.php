@@ -50,6 +50,8 @@ Route::middleware('admin_auth')->group(function(){
        Route::post('pizzaCreate',[ProductController::class,'pizzaCreate'])->name('product#pizzaCreate');
        Route::get('delete/{id}',[ProductController::class,'pizzaDelete'])->name('product#pizzaDelete');
        Route::get('pizzaInfoPage/{id}',[ProductController::class,'pizzaInfo'])->name('product#pizzaInfoPage');
+       Route::get('pizzaUpdatePage/{id}',[ProductController::class,'pizzaUpdatePage'])->name('product#pizzaUpdatePage');
+       Route::post('pizzaUpdate/{id}',[ProductController::class,'pizzaUpdate'])->name('product#pizzaUpdate');
     });
 });
 

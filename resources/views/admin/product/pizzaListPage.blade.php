@@ -84,7 +84,7 @@
                                             <i class="zmdi zmdi-mail-send"></i>
                                         </button> --}}
                                                     <div class=" mr-3">
-                                                        <a href="">
+                                                        <a href="{{route('product#pizzaUpdatePage',$p->id)}}">
                                                             <button class="item" data-toggle="tooltip"
                                                                 data-placement="top" title="Edit">
                                                                 <i class="zmdi zmdi-edit"></i>

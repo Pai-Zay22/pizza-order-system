@@ -18,7 +18,7 @@
             <div class="col-8 offset-2">
                 <div class="card">
                     <div class=" ml-3 mt-3">
-                        <i class="fa-solid fa-arrow-left" onclick="history."></i>
+                        <i class="fa-solid fa-arrow-left" onclick="history.back()"></i>
                     </div>
                     <div class="card-body">
                         <div class="card-title">
@@ -27,7 +27,7 @@
                         <hr>
                         <div class="row  justify-content-center ">
                             <div class="col ml-3">
-                              <img src="{{asset('storage/'.$pizza->image)}}" alt="" style=" border-radius:10px;">
+                              <img src="{{asset('storage/'.$pizza->image)}}" alt="" style=" border-radius:10px;" class=" img-thumbnail">
                             </div>
                             <div class="col mr-5">
                                 <div class=" btn btn-success text-white">Name -> {{$pizza->name}}</div>
@@ -37,21 +37,15 @@
                                 </div>
                                 <div class=" mt-3 d-flex">
                                     <div class=" btn btn-dark text-white mr-2"><i class="fa-solid fa-eye"></i> {{$pizza->view_count}}</div>
-                                    <div class=" btn btn-dark text-white"><i class="fa-solid fa-clock"></i> {{$pizza->waiting_time}} mins </div>
+                                    <div class=" btn btn-dark text-white mr-2"><i class="fa-solid fa-clock"></i> {{$pizza->waiting_time}} mins </div>
+                                    <div class=" btn btn-dark text-white "><i class="fa-solid fa-calendar"></i>  {{$pizza->created_at->format('j / F / y')}}</div>
                                 </div>
-                                <h5 class=" mt-3"><ul>Description</ul></h5>
-                                <div class="mt-2">{{$pizza->description}}</div>
+                                <div>
+                                    <h5 class="mt-3 text-bold">Description</h5>
+                                    <div class=" mt-2" style = "line-height:20px;">{{$pizza->description}}</div>
+                                </div>
                             </div>
                         </div>
-                        <div class=" text-center mt-5">
-                            <a href="{{ route('admin#accountEditPage') }}">
-                                <button class=" btn btn-dark text-white text-center"><i
-                                        class=" mr-2 fa-solid fa-pen"></i>Edit Info</button>
-
-                            </a>
-                        </div>
-
-
                     </div>
                 </div>
             </div>
