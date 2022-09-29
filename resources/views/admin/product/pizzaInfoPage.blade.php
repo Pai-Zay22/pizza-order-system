@@ -33,7 +33,7 @@
                                 <div class=" btn btn-success text-white">Name -> {{$pizza->name}}</div>
                                 <div class=" mt-3 d-flex">
                                     <div class=" btn btn-dark text-white mr-2"><i class="fa-solid fa-money-bill-1"></i> {{$pizza->price}} Mmk</div>
-                                    <div class=" btn btn-dark text-white">Category -> {{$pizza->category_id}} </div>
+                                    <div class=" btn btn-dark text-white">Category -> {{$pizza->category_name}} </div>
                                 </div>
                                 <div class=" mt-3 d-flex">
                                     <div class=" btn btn-dark text-white mr-2"><i class="fa-solid fa-eye"></i> {{$pizza->view_count}}</div>

@@ -76,7 +76,7 @@
                                                     class=" img-thumbnail"style=" width:130px;height:120px;"></td>
                                             <td class="desc text-bold text-5xl">{{ $p->name }}</td>
                                             <td>{{ $p->price }} Mmk</td>
-                                            <td> {{ $p->category_id }}</td>
+                                            <td> {{ $p->category_name }}</td>
                                             <td> <i class="fa-solid fa-eye"></i> {{$p->view_count}}</td>
                                             <td>
                                                 <div class="table-data-feature">

@@ -13,9 +13,12 @@ class ProductController extends Controller
     //direct pizza list page
     public function pizzaListPage(){
 
-        $pizzas = Product::when(request('key'),function($query){
-                    $query->where('name','like','%'.request('key').'%');
-                })->orderby('id','desc')->paginate(3);
+        $pizzas = Product::select('products.*','categories.name as category_name')
+                ->when(request('key'),function($query){
+                    $query->where('products.name','like','%'.request('key').'%');
+                })
+                ->leftJoin('categories','products.category_id','categories.id')
+                ->orderby('products.id','desc')->paginate(3);
         $pizzas->appends(request()->all());
         return view('admin.product.pizzaListPage',compact('pizzas'));
     }
@@ -46,7 +49,9 @@ class ProductController extends Controller
 
     //direct pizza info page
     public function pizzaInfo($id){
-        $pizza = Product::where('id',$id)->first();
+        $pizza = Product::select('products.*','categories.name as category_name')
+                ->leftJoin('categories','products.category_id','categories.id')
+                ->where('products.id',$id)->first();
         return view('admin.product.pizzaInfoPage',compact('pizza'));
     }
 
