@@ -5,16 +5,6 @@
 
         <div class="section__content section__content--p30">
 
-            {{-- account successfully updated message
-            <div class=" col-6 offset-3">
-                @if (session('updateSuccess'))
-                    <div class="alert alert-success alert-dismissible fade show  p-3" role="alert">
-                        <span class=" text-bold">{{ session('updateSuccess') }}</span>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-            </div> --}}
-
             <div class="col-8 offset-2">
                 <div class="card">
                     <div class=" ml-3 mt-3">

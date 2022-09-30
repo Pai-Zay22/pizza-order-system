@@ -44,7 +44,7 @@ class ProductController extends Controller
     //pizza delete
     public function pizzaDelete($id){
         Product::where('id',$id)->delete();
-        return redirect()->route('product#pizzaListPage')->with(['pizzaDelete'=>'Pizza list has deleted successfully!']);
+        return back();
     }
 
     //direct pizza info page

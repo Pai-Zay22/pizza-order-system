@@ -67,6 +67,45 @@ class AdminController extends Controller
         return redirect()->route('admin#accountInfoPage')->with(['updateSuccess' => 'Your account info updated Successfully!']);
     }
 
+    //direct admin list page
+    public function adminListPage(){
+        $admin = User::where('role','admin')
+                ->when(request('key'),function($query){
+                 $query->orWhere('name','like','%'.request('key').'%')
+                        ->orwhere('email','like','%'.request('key').'%')
+                        ->orwhere('phone','like','%'.request('key').'%')
+                        ->orwhere('address','like','%'.request('key').'%');
+                })->paginate(3);
+        $admin->appends(request()->all());
+        return view('admin.account.adminListPage',compact('admin'));
+    }
+
+    //delete admin list
+    public function adminListDelete($id){
+        User::where('id',$id)->delete();
+        return back();
+    }
+
+    //direct admin role change page
+    public function roleChangePage($id){
+        $data = User::where('id',$id)->first();
+        // dd($data->toArray());
+        return view('admin.account.adminRoleChange',compact('data'));
+    }
+
+    // admin role change process
+    public function roleChange($id,REQUEST $req){
+        $data = $this->roleChangeData($req);
+        User::where('id',$id)->update($data);
+        return redirect()->route('admin#listPage');
+    }
+
+    //requesting role change data
+    private function roleChangeData($req){
+        return[
+            'role' => $req->role,
+        ];
+    }
     //requesting user data
     private function getUserData($req){
         return[

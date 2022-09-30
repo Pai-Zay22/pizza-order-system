@@ -35,7 +35,7 @@ class CategoryController extends Controller
     //admin catergory delete
     public function delete($id){
         Category::where('id',$id)->delete();
-        return back()->with(['categoryDelete' => 'Category Deleted Sucessfully!']);
+        return back();
     }
 
     //admin category edit

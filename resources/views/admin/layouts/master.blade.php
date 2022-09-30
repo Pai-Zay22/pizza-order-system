@@ -123,13 +123,21 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         @if (Auth::user()->image == null)
-                                            <div class="image" style="border-radius: 50%;">
-                                                <img src="{{ asset('image/default_user.jpg') }}" alt="John Doe" />
-                                            </div>
+                                            @if (Auth::user()->gender == 'male')
+                                                <div class="image" style="border-radius: 50%;">
+                                                    <img src="{{ asset('image/default_user.jpg') }}"
+                                                        alt="John Doe" />
+                                                </div>
+                                            @else
+                                                <div class="image" style="border-radius: 50%;">
+                                                    <img src="{{ asset('image/default_female.jpg') }}"
+                                                        alt="John Doe" />
+                                                </div>
+                                            @endif
                                         @else
                                             <div class="image">
-                                                <img src="{{ asset('storage/'.Auth::user()->image)  }}"
-                                                 alt="John Doe" />
+                                                <img src="{{ asset('storage/' . Auth::user()->image) }}"
+                                                    alt="John Doe" />
                                             </div>
                                         @endif
 
@@ -139,14 +147,21 @@
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 @if (Auth::user()->image == null)
-                                                    <div class="image"  >
-                                                        <img src="{{ asset('image/default_user.jpg') }}"
-                                                        alt="John Doe" />
-                                                    </div>
+                                                    @if (Auth::user()->gender == 'male')
+                                                        <div class="image" style="border-radius: 50%;">
+                                                            <img src="{{ asset('image/default_user.jpg') }}"
+                                                                alt="John Doe" />
+                                                        </div>
+                                                    @else
+                                                        <div class="image" style="border-radius: 50%;">
+                                                            <img src="{{ asset('image/default_female.jpg') }}"
+                                                                alt="John Doe" />
+                                                        </div>
+                                                    @endif
                                                 @else
                                                     <div class="image">
-                                                        <img src="{{ asset('storage/'.Auth::user()->image) }}"
-                                                         alt="John Doe" />
+                                                        <img src="{{ asset('storage/' . Auth::user()->image) }}"
+                                                            alt="John Doe" />
                                                     </div>
                                                 @endif
                                                 <div class="content">
@@ -158,8 +173,14 @@
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="{{route('admin#accountInfoPage')}}">
+                                                    <a href="{{ route('admin#accountInfoPage') }}">
                                                         <i class="zmdi zmdi-account"></i>Account Info</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="{{ route('admin#listPage') }}">
+                                                        <i class="zmdi zmdi-accounts"></i>Admin List</a>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -193,6 +214,8 @@
 
 
         </div>
+
+        {{-- Sweet Alert --}}
 
         <!-- Jquery JS-->
         <script src="{{ asset('admin/vendor/jquery-3.2.1.min.js') }}"></script>

@@ -25,12 +25,18 @@
                         <div class="row  justify-content-center align-items-center">
                             <div class="col ml-3">
                                 @if (Auth::user()->image == null)
-                                    <div class="image" style="border-radius: 50%;">
-                                        <img src="{{ asset('image/default_user.jpg') }}" alt="John Doe" />
-                                    </div>
+                                    @if (Auth::user()->gender == 'male')
+                                        <div class="image" style="border-radius: 50%;">
+                                            <img src="{{ asset('image/default_user.jpg') }}" alt="John Doe" />
+                                        </div>
+                                    @else
+                                        <div class="image" style="border-radius: 50%;">
+                                            <img src="{{ asset('image/default_female.jpg') }}" alt="John Doe" />
+                                        </div>
+                                    @endif
                                 @else
                                     <div class="image">
-                                        <img src="{{ asset('storage/'.Auth::user()->image) }}" alt="{{Auth::user()->name}}"style=" width:250px; border-radius:10px;"/>
+                                        <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="John Doe" />
                                     </div>
                                 @endif
                             </div>
@@ -63,6 +69,5 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection

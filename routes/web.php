@@ -25,7 +25,7 @@ Route::middleware('admin_auth')->group(function(){
         Route::get('list',[CategoryController::class,'list'])->name('category#list');
         Route::get('create/page',[CategoryController::class,'createPage'])->name('category#createPage');
         Route::post('create',[CategoryController::class,'create'])->name('category#create');
-        Route::get('delete/{id}',[CategoryController::class,'delete'])->name('category#delete');
+        Route::delete('delete/{id}',[CategoryController::class,'delete'])->name('category#delete');
         Route::get('edit/{id}',[CategoryController::class,'edit'])->name('category#edit');
         Route::post('update',[CategoryController::class,'update'])->name('category#update');
     });
@@ -40,7 +40,10 @@ Route::middleware('admin_auth')->group(function(){
         Route::get('accountInfoPage',[AdminController::class,'accountInfoPage'])->name('admin#accountInfoPage');
         Route::get('accountEditPage',[AdminController::class,'accountEditPage'])->name('admin#accountEditPage');
         Route::post('accountUpdate/{id}',[AdminController::class,'accountUpdate'])->name('admin#accountUpdate');
-
+        Route::get('listPage',[AdminController::class,'adminListPage'])->name('admin#listPage');
+        Route::delete('delete/{id}',[AdminController::class,'adminListDelete'])->name('admin#listDelete');
+        Route::get('roleChangePage/{id}',[AdminController::class,'roleChangePage'])->name('admin#roleChangePage');
+        Route::post('roleChange/{id}',[AdminController::class,'roleChange'])->name('admin#roleChange');
     });
 
     //admin->product
@@ -48,7 +51,7 @@ Route::middleware('admin_auth')->group(function(){
        Route::get('pizzaListPage',[ProductController::class,'pizzalistPage'])->name('product#pizzaListPage');
        Route::get('pizzaCreatePage',[ProductController::class,'pizzaCreatePage'])->name('product#pizzaCreatePage');
        Route::post('pizzaCreate',[ProductController::class,'pizzaCreate'])->name('product#pizzaCreate');
-       Route::get('delete/{id}',[ProductController::class,'pizzaDelete'])->name('product#pizzaDelete');
+       Route::delete('delete/{id}',[ProductController::class,'pizzaDelete'])->name('product#pizzaDelete');
        Route::get('pizzaInfoPage/{id}',[ProductController::class,'pizzaInfo'])->name('product#pizzaInfoPage');
        Route::get('pizzaUpdatePage/{id}',[ProductController::class,'pizzaUpdatePage'])->name('product#pizzaUpdatePage');
        Route::post('pizzaUpdate/{id}',[ProductController::class,'pizzaUpdate'])->name('product#pizzaUpdate');
