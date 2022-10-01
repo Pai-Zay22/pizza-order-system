@@ -1,10 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\AuthenicationController;
 
 
@@ -61,7 +61,7 @@ Route::middleware('admin_auth')->group(function(){
 
 //user->home
 Route::group(['prefix' => 'user', 'middleware' => 'user_auth'],function(){
-    Route::get('home',[UserController::class,'home'])->name('user#home');
+    Route::get('homePage',[UserController::class,'homePage'])->name('user#homePage');
 });
 });
 
