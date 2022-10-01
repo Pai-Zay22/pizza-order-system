@@ -58,10 +58,22 @@ Route::middleware('admin_auth')->group(function(){
     });
 });
 
+//user
 
-//user->home
-Route::group(['prefix' => 'user', 'middleware' => 'user_auth'],function(){
-    Route::get('homePage',[UserController::class,'homePage'])->name('user#homePage');
+Route::middleware('user_auth')->group(function(){
+
+    //home page
+    Route::prefix('user')->group(function(){
+        Route::get('homePage',[UserController::class,'homePage'])->name('user#homePage');
+    });
+
+    //account
+    Route::prefix('account')->group(function(){
+        Route::get('passwordChangePage/',[UserController::class,'passwordChangePage'])->name('user#pwChangePage');
+        Route::post('passwordChange/',[UserController::class,'passwordChange'])->name('user#pwChange');
+    });
+
+
 });
 });
 

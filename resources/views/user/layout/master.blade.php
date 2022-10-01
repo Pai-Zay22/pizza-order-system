@@ -52,7 +52,7 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="shop.html" class="nav-item nav-link active">Home</a>
+                                <a href="{{route('user#homePage')}}" class="nav-item nav-link active">Home</a>
                                 {{-- <a href="cart.html" class="nav-item nav-link">My Cart</a>
                                 <a href="contact.html" class="nav-item nav-link">Contact</a> --}}
                             </div>
@@ -76,7 +76,7 @@
                             </button>
                             <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-user mr-3"></i>Account Info</a></li>
-                            <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-key mr-3"></i>Password change</a></li>
+                            <li><a class="dropdown-item" href="{{route('user#pwChangePage')}}"> <i class="fa-solid fa-key mr-3"></i>Password change</a></li>
                             <li>
                                 <form action="{{route('logout')}} " method="POST">
                                  @csrf
