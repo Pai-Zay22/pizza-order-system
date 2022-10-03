@@ -26,7 +26,9 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('user/css/style.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -52,7 +54,7 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
-                                <a href="{{route('user#homePage')}}" class="nav-item nav-link active">Home</a>
+                                <a href="{{ route('user#homePage') }}" class="nav-item nav-link active">Home</a>
                                 {{-- <a href="cart.html" class="nav-item nav-link">My Cart</a>
                                 <a href="contact.html" class="nav-item nav-link">Contact</a> --}}
                             </div>
@@ -71,18 +73,39 @@
                         </div>
 
                         <div class="btn-group ml-5 ">
-                            <button type="button" class="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{Auth::user()->name}}
+                            <button type="button" class="btn btn-warning dropdown-toggle my-2" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <div class=" d-flex align-items-center">
+                                    <div class=" mr-2 d-flex align-items-center">
+                                        <div class=" mr-2">
+                                            @if (Auth::user()->image == null)
+                                                @if (Auth::user()->gender == 'male')
+                                                    <img src="{{ asset('image/default_user.jpg') }}"  width="50px" height="50px" style=" border-radius: 50%" />
+                                                @else
+                                                    <img src="{{ asset('image/default_female.jpg') }}"  width="50px" height="50px" style=" border-radius: 50%" />
+                                                @endif
+                                            @else
+                                                <img src="{{ asset('storage/' . Auth::user()->image) }}"
+                                                     width="50px" height="50px" style=" border-radius: 50%" />
+
+                                            @endif
+                                        </div>
+                                        <div>{{ Auth::user()->name }}</div>
+                                    </div>
+                                    <div><i class="fa-solid fa-chevron-down"></i></div>
+                                </div>
                             </button>
                             <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"> <i class="fa-solid fa-user mr-3"></i>Account Info</a></li>
-                            <li><a class="dropdown-item" href="{{route('user#pwChangePage')}}"> <i class="fa-solid fa-key mr-3"></i>Password change</a></li>
-                            <li>
-                                <form action="{{route('logout')}} " method="POST">
-                                 @csrf
-                                 <button type="submit" class=" btn btn-danger col-12">Log Out</button>
-                                </form>
-                            </li>
+                                <li><a class="dropdown-item" href="{{ route('user#accountUpdatePage') }}"> <i
+                                            class="fa-solid fa-user mr-3"></i>Account Info</a></li>
+                                <li><a class="dropdown-item" href="{{ route('user#pwChangePage') }}"> <i
+                                            class="fa-solid fa-key mr-3"></i>Password change</a></li>
+                                <li>
+                                    <form action="{{ route('logout') }} " method="POST">
+                                        @csrf
+                                        <button type="submit" class=" btn btn-danger col-12">Log Out</button>
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                     </nav>
@@ -199,7 +222,9 @@
         <!-- Template Javascript -->
         <script src="{{ asset('user/js/main.js') }}"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
 </body>
 
 </html>

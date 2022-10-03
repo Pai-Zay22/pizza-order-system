@@ -62,17 +62,17 @@ Route::middleware('admin_auth')->group(function(){
 
 Route::middleware('user_auth')->group(function(){
 
-    //home page
-    Route::prefix('user')->group(function(){
-        Route::get('homePage',[UserController::class,'homePage'])->name('user#homePage');
-    });
 
-    //account
-    Route::prefix('account')->group(function(){
+    Route::prefix('user')->group(function(){
+        //home page
+        Route::get('homePage',[UserController::class,'homePage'])->name('user#homePage');
+
+         //account
         Route::get('passwordChangePage/',[UserController::class,'passwordChangePage'])->name('user#pwChangePage');
         Route::post('passwordChange/',[UserController::class,'passwordChange'])->name('user#pwChange');
+        Route::get('accountUpdatePage/',[UserController::class,'accountUpdatePage'])->name('user#accountUpdatePage');
+        Route::post('accountUpdate/{id}',[UserController::class,'accountUpdate'])->name('user#accountUpdate');
     });
-
 
 });
 });
