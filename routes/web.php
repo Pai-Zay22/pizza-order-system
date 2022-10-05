@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -62,16 +63,21 @@ Route::middleware('admin_auth')->group(function(){
 
 Route::middleware('user_auth')->group(function(){
 
-
     Route::prefix('user')->group(function(){
         //home page
         Route::get('homePage',[UserController::class,'homePage'])->name('user#homePage');
+        Route::get('filter/{id}',[UserController::class,'filter'])->name('user#filter');
 
          //account
         Route::get('passwordChangePage/',[UserController::class,'passwordChangePage'])->name('user#pwChangePage');
         Route::post('passwordChange/',[UserController::class,'passwordChange'])->name('user#pwChange');
         Route::get('accountUpdatePage/',[UserController::class,'accountUpdatePage'])->name('user#accountUpdatePage');
         Route::post('accountUpdate/{id}',[UserController::class,'accountUpdate'])->name('user#accountUpdate');
+    });
+
+    //ajax
+    Route::prefix('ajax')->group(function(){
+        Route::get('product/list',[AjaxController::class,'productList'])->name('ajax#productList');
     });
 
 });

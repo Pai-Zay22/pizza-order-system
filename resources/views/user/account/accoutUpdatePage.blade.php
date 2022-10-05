@@ -6,6 +6,9 @@
         <div class="section__content section__content--p30">
             <div class="col-lg-8 offset-2">
                 <div class="card">
+                    <div class=" ml-3 mt-3">
+                        <i class="fa-solid fa-arrow-left" onclick="history.back()"></i>
+                    </div>
                     <div class="card-body">
                         <div class="card-title">
                             <h3 class="text-center title-2">Account Update Page</h3>

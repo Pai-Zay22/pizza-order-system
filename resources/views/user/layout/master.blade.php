@@ -90,7 +90,7 @@
 
                                             @endif
                                         </div>
-                                        <div>{{ Auth::user()->name }}</div>
+                                        <div class=" text-black-50">{{ Auth::user()->name }}</div>
                                     </div>
                                     <div><i class="fa-solid fa-chevron-down"></i></div>
                                 </div>
@@ -211,6 +211,7 @@
 
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <script src="{{ asset('user/lib/easing/easing.min.js') }}"></script>
         <script src="{{ asset('user/lib/owlcarousel/owl.carousel.min.js') }}"></script>
@@ -226,5 +227,5 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
 </body>
-
+    @yield('scriptCode')
 </html>
