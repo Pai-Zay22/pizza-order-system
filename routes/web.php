@@ -68,6 +68,13 @@ Route::middleware('user_auth')->group(function(){
         Route::get('homePage',[UserController::class,'homePage'])->name('user#homePage');
         Route::get('filter/{id}',[UserController::class,'filter'])->name('user#filter');
 
+        //pizza
+        Route::prefix('pizza')->group(function(){
+            //pizza detail
+            Route::get('detailPage/{id}',[UserController::class,'pizzaDetailPage'])->name('user#pizzaDetailPage');
+
+        });
+
          //account
         Route::get('passwordChangePage/',[UserController::class,'passwordChangePage'])->name('user#pwChangePage');
         Route::post('passwordChange/',[UserController::class,'passwordChange'])->name('user#pwChange');

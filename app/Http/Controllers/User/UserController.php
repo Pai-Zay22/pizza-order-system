@@ -28,6 +28,13 @@ class UserController extends Controller
         return view('user.main.home',compact('product','category'));
     }
 
+    //direct pizza detail page
+    public function pizzaDetailPage($pizzaId){
+        $pizza = Product::where('id',$pizzaId)->first();
+        $pizzaList = Product::get();
+        return view('user.main.pizzaDetailPage',compact('pizza','pizzaList'));
+    }
+
     //direct password change page
     public function passwordChangePage(){
         return view('user.account.passwordChangePage');
