@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
@@ -18,7 +19,8 @@ class UserController extends Controller
     public function homePage(){
         $product = Product::get();
         $category = Category::get();
-        return view('user.main.home',compact('product','category'));
+        $totalOrder = Cart::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('product','category','totalOrder'));
     }
 
     //filter by category
@@ -83,6 +85,19 @@ class UserController extends Controller
         }
         User::where('id',$id)->update($data);
         return redirect()->route('user#homePage');
+    }
+
+    //direct cart list page
+    public function cartListPage(){
+        $cartListData = Cart::select('carts.*','products.name as pizzaName','products.price as pizzaPrice')
+                        ->leftJoin('products','products.id','carts.product_id')
+                        ->where('carts.user_id',Auth::user()->id)
+                        ->get();
+        $totalPrice = 0;
+        foreach($cartListData as $c){
+            $totalPrice += $c->pizzaPrice * $c->quantity;
+        }
+        return view('user.main.cartListPage',compact('cartListData','totalPrice'));
     }
 
     //user data validation check

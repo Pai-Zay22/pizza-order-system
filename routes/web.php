@@ -72,7 +72,7 @@ Route::middleware('user_auth')->group(function(){
         Route::prefix('pizza')->group(function(){
             //pizza detail
             Route::get('detailPage/{id}',[UserController::class,'pizzaDetailPage'])->name('user#pizzaDetailPage');
-
+            Route::get('cartListPage',[UserController::class,'cartListPage'])->name('user#cartListPage');
         });
 
          //account

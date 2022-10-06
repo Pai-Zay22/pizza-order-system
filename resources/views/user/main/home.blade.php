@@ -35,10 +35,14 @@
                 <div class="row pb-3">
                     <div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <div>
-                                <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
-                                <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
-                            </div>
+                            <a href="{{route('user#cartListPage')}}">
+                                <button type="button" class="btn btn-primary position-relative">
+                                    <i class="fa-solid fa-cart-shopping p-2"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge text-white rounded bg-info ">
+                                      <span class=" p-1">{{count($totalOrder)}}</span>
+                                    </span>
+                                </button>
+                            </a>
                             <div class="ml-2">
                                 <select class=" form-control" id="sorting">
                                     <option value="">Choose one option</option>
