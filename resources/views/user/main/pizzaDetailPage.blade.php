@@ -1,4 +1,5 @@
 @extends('user.layout.master')
+@section('title','Pizza Detail Page')
 
 @section('content')
 
@@ -23,6 +24,8 @@
             <div class="col-lg-7 h-auto mb-30">
                 <div class="h-100 bg-light p-30">
                     <h3 class=" text-success">{{$pizza->name}}</h3>
+                    <input type="hidden" id="productId" name="" value="{{$pizza->id}}">
+                    <input type="hidden" id="userId" name="" value="{{Auth::user()->id}}">
                     <div><i class="fa-solid fa-eye mr-2 my-2"></i>{{$pizza->view_count}}</div>
                     <h5 class="font-weight-semi-bold mb-4">{{$pizza->price}} kyats</h5>
                     <p class=" mb-3">{{$pizza->description}}</p>
@@ -33,14 +36,14 @@
                                     <i class="fa fa-minus"></i>
                                 </button>
                             </div>
-                            <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                            <input type="text"  id ="quantity" class="form-control bg-secondary border-0 text-center" value="1">
                             <div class="input-group-btn">
                                 <button class="btn btn-primary btn-plus">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                         </div>
-                        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                        <button type="button" class="btn btn-primary px-3" id="cartBtn"><i class="fa fa-shopping-cart mr-1"></i> Add To
                             Cart</button>
                     </div>
                     <div class="d-flex pt-2">
@@ -96,7 +99,34 @@
         </div>
     </div>
     <!-- Products End -->
+@endsection
 
+@section('scriptCode')
+    <script>
+        $(document).ready(function(){
+            $('#cartBtn').click(function(){
+                let quantity = $('#quantity').val();
+                let userId = $('#userId').val();
+                let productId = $('#productId').val();
+                let status = {
+                    'userId' : userId,
+                    'productId' : productId,
+                    'quantity' : quantity,
+                };
+                $.ajax({
+                    type : 'get',
+                    url : 'http://127.0.0.1:8000/ajax/addToCart',
+                    data : status,
+                    dataType : 'json',
+                    success: function(response){
+                       if(response.status == 'success'){
+                            window.location.href = "http://127.0.0.1:8000/user/homePage";
+                       }
+                    }
 
+                });
+            })
 
+        })
+    </script>
 @endsection
