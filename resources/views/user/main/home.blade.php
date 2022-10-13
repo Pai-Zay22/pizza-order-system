@@ -57,8 +57,8 @@
                       @if (count($product) != 0)
                         @foreach ($product as $p)
                             <div class="col-lg-6 col-xl-4 col-md-6 col-sm-6 pb-1">
-                                <div class="product-item bg-light mb-4">
-                                    <div class="product-img position-relative overflow-hidden">
+                                <div class="product-item bg-light mb-4 ">
+                                    <div class="product-img position-relative overflow-hidden" style="">
                                         <img class=" img-fluid w-100"  src="{{ asset('storage/' . $p->image) }}" alt=""
                                             style="height:200px">
                                         <div class="product-action">

@@ -19,12 +19,13 @@
                             <th>Remove</th>
                         </tr>
                     </thead>
-                    <tbody class="align-middle">
+                    <tbody class="align-middle ">
                         @foreach ($cartListData as $c)
                             <tr>
-
-                                <td class="align-middle">{{ $c->pizzaName }}</td>
+                                <input type="hidden" name="" value="{{$c->product_id}}" class="pId">
+                                <td class="align-middle ">{{ $c->pizzaName }}</td>
                                 <td class="align-middle price">{{ $c->pizzaPrice }} kyats</td>
+                                <input type="hidden" name="" class=" uId" value="{{$c->user_id}}">
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
                                         <div class="input-group-btn">
@@ -70,7 +71,7 @@
                             <h5>Total</h5>
                             <h5 class=" fprice">{{$totalPrice + 3000}} kyats</h5>
                         </div>
-                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
+                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3 proceedBtn">Proceed To Checkout</button>
                     </div>
                 </div>
             </div>
@@ -109,13 +110,43 @@
             //get summary total
             function summaryTotal(){
                 let totalPrice = 0;
-                $('.dataTable tr').each(function(index,row){
+                $('.dataTable tbody tr').each(function(index,row){
                     let data = Number($(row).find('.totalPrice').text().replace('kyats',''));
                     totalPrice += data;
                 });
                 $('.tprice').html(totalPrice +' '+ 'kyats');
                 $('.fprice').html(totalPrice+3000 +' ' + 'kyats');
             }
-        })
-    </script>
+
+        });
+     </script>
+
+     <script>
+         //proceed to checkout
+        $('.proceedBtn').click(function(){
+                let orderList = [];
+                let random = Math.floor(Math.random()*1000000);
+                $('.dataTable tbody tr').each(function(index,row){
+                    orderList.push({
+                    'user_id' : $(row).find('.uId').val(),
+                    'product_id' : $(row).find('.pId').val(),
+                    'quantity' : $(row).find('#qty').val(),
+                    'total_price' : $(row).find('.totalPrice').text().replace('kyats','')*1,
+                    'order_code' : 'POS' + random,
+                    });
+                });
+                $.ajax({
+                    type : 'get',
+                    url : 'http://127.0.0.1:8000/ajax/orderList',
+                    data : Object.assign({}, orderList),
+                    dataType : 'json',
+                    success : function(response){
+                        if(response.status == 'success'){
+                            window.location.href = "http://127.0.0.1:8000/user/homePage";
+                        }
+
+                    }
+                });
+            });
+     </script>
 @endsection
