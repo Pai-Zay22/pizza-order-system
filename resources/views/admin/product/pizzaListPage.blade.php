@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Pizza List Page')
+@section('title', 'Product List Page')
 
 @section('content')
 
@@ -13,14 +13,14 @@
                     <div class="table-data__tool">
                         <div class="table-data__tool-left">
                             <div class="overview-wrap">
-                                <h2 class="title-1 text-black text-xl-center">Pizza List Page</h2>
+                                <h2 class="title-1 text-black text-xl-center">Product List Page</h2>
 
                             </div>
                         </div>
                         <div class="table-data__tool-right">
                             <a href="{{ route('product#pizzaCreatePage') }}">
                                 <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                    <i class="zmdi zmdi-plus"></i>add pizza
+                                    <i class="zmdi zmdi-plus"></i>add product
                                 </button>
                             </a>
                             <button class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -40,7 +40,7 @@
                     {{-- Search bar total and serach key section  --}}
                     <div class=" my-3 d-flex  justify-content-between align-items-center">
                         <div>
-                            <span class=" text-black text-xl-center">Total Pizza = {{ $pizzas->total() }}</span>
+                            <span class=" text-black text-xl-center">Total Product = {{ $pizzas->total() }}</span>
                         </div>
                         <div>
                             <span class=" text-black text-xl-center">Search Key = {{ request('key') }}</span>
@@ -50,7 +50,7 @@
                                 @csrf
                                 <div class=" input-group-text">
                                     <input type="text" name="key" id="" value="{{ request('key') }}"
-                                        class=" form-control" placeholder="Search Pizza...">
+                                        class=" form-control" placeholder="Search Product...">
                                     <button class=" btn btn-primary" type="submit">Search</button>
                                 </div>
                             </form>
@@ -80,7 +80,7 @@
                                             <td> <i class="fa-solid fa-eye"></i> {{$p->view_count}}</td>
                                             <td>
                                                 <div class="table-data-feature">
-                                        
+
                                                     <div class=" mr-3">
                                                         <a href="{{route('product#pizzaUpdatePage',$p->id)}}">
                                                             <button class="item" data-toggle="tooltip"
@@ -117,7 +117,7 @@
                             </table>
                         </div>
                     @else
-                        <h3 class=" text-dark text-center mt-5">There is no pizza here!</h3>
+                        <h3 class=" text-dark text-center mt-5">There is no oroduct here!</h3>
                     @endif
 
 
@@ -140,7 +140,7 @@
             var name = $(this).data("name");
             event.preventDefault();
             swal({
-                title: "Are you sure you want to delete this pizza list?",
+                title: "Are you sure you want to delete this product list?",
                 text: "If you delete this, it will be gone forever.",
                 icon: "warning",
                 type: "warning",

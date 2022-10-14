@@ -56,13 +56,13 @@
                     <div id="listPage" class="row">
                       @if (count($product) != 0)
                         @foreach ($product as $p)
-                            <div class="col-lg-6 col-xl-4 col-md-6 col-sm-6 pb-1">
-                                <div class="product-item bg-light mb-4 ">
+                            <div class=" mx-3">
+                                <div class="product-item bg-light mb-4 " style=" width:300px;">
                                     <div class="product-img position-relative overflow-hidden" style="">
                                         <img class=" img-fluid w-100"  src="{{ asset('storage/' . $p->image) }}" alt=""
                                             style="height:200px">
                                         <div class="product-action">
-                                            <a class="btn btn-outline-dark btn-square" href=""><i
+                                            <a class="btn btn-outline-dark btn-square" id="cartBtn" ><i
                                                     class="fa fa-shopping-cart"></i></a>
                                             <a  href="{{route("user#pizzaDetailPage",$p->id)}}" class="btn btn-outline-dark btn-square" ><i class="fa-solid fa-info"></i></a>
                                         </div>
@@ -91,6 +91,19 @@
 @section('scriptCode')
     <script>
         $(document).ready(function() {
+                $.ajax({
+                    type : 'get',
+                    url : 'http://127.0.0.1:8000/ajax/addToCart',
+                    data : status,
+                    dataType : 'json',
+                    success: function(response){
+                       if(response.status == 'success'){
+                            window.location.href = "http://127.0.0.1:8000/user/homePage";
+                       }
+                    }
+
+                });
+            });
 
             $('#sorting').change(function() {
                 let sortingValue = $('#sorting').val();
@@ -114,8 +127,7 @@
                                         <div class="product-action">
                                             <a class="btn btn-outline-dark btn-square" href=""><i
                                                     class="fa fa-shopping-cart"></i></a>
-                                            <a class="btn btn-outline-dark btn-square" href=""><i
-                                                    class="fa fa-search"></i></a>
+                                            <a  href="{{route("user#pizzaDetailPage",$p->id)}}" class="btn btn-outline-dark btn-square" ><i class="fa-solid fa-info"></i></a>
                                         </div>
                                     </div>
                                     <div class="text-center py-4">
@@ -152,8 +164,7 @@
                                             <div class="product-action">
                                                 <a class="btn btn-outline-dark btn-square" href=""><i
                                                         class="fa fa-shopping-cart"></i></a>
-                                                <a class="btn btn-outline-dark btn-square" href=""><i
-                                                        class="fa fa-search"></i></a>
+                                                 <a  href="{{route("user#pizzaDetailPage",$p->id)}}" class="btn btn-outline-dark btn-square" ><i class="fa-solid fa-info"></i></a>
                                             </div>
                                         </div>
                                         <div class="text-center py-4">
