@@ -124,11 +124,7 @@
                                     <div class="product-img position-relative overflow-hidden">
                                         <img src="{{ asset('storage/${response[i].image}') }}" alt=""
                                             style=" width:330px;height:200px;">
-                                        <div class="product-action">
-                                            <a class="btn btn-outline-dark btn-square" href=""><i
-                                                    class="fa fa-shopping-cart"></i></a>
-                                            <a  href="{{route("user#pizzaDetailPage",$p->id)}}" class="btn btn-outline-dark btn-square" ><i class="fa-solid fa-info"></i></a>
-                                        </div>
+
                                     </div>
                                     <div class="text-center py-4">
                                         <h4 class=" text-info">${response[i].name} </h4>
@@ -164,7 +160,7 @@
                                             <div class="product-action">
                                                 <a class="btn btn-outline-dark btn-square" href=""><i
                                                         class="fa fa-shopping-cart"></i></a>
-                                                 <a  href="{{route("user#pizzaDetailPage",$p->id)}}" class="btn btn-outline-dark btn-square" ><i class="fa-solid fa-info"></i></a>
+                                                
                                             </div>
                                         </div>
                                         <div class="text-center py-4">

@@ -42,9 +42,10 @@ class AjaxController extends Controller
             'total_price' => $item['total_price'],
             'order_code' => $item['order_code'],
            ]);
+           $total += $data->total_price;
 
         };
-        $total += $data->total_price + 3000;
+        $total = $total + 3000;
         Cart::where('user_id',Auth::user()->id)->delete();
         Order::create([
             'user_id' => Auth::user()->id,
