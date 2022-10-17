@@ -13,11 +13,12 @@
 
                 <div class="bg-light p-4 mb-30">
                     <div class=" d-flex align-items-center justify-content-between mb-3">
-                        <a href="{{route('user#homePage')}}"><label class=" text-dark">All</label></a>
+                        <a href="{{ route('user#homePage') }}"><label class=" text-dark">All</label></a>
                     </div>
                     @foreach ($category as $c)
                         <div class=" d-flex align-items-center justify-content-between mb-3">
-                           <a href="{{route('user#filter',$c->id)}}}"><label class=" text-dark">{{ $c->name }}</label></a>
+                            <a href="{{ route('user#filter', $c->id) }}}"><label
+                                    class=" text-dark">{{ $c->name }}</label></a>
                         </div>
                     @endforeach
 
@@ -35,14 +36,26 @@
                 <div class="row pb-3">
                     <div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
-                            <a href="{{route('user#cartListPage')}}">
-                                <button type="button" class="btn btn-primary position-relative">
-                                    <i class="fa-solid fa-cart-shopping p-2"></i>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge text-white rounded bg-info ">
-                                      <span class=" p-1">{{count($totalOrder)}}</span>
-                                    </span>
-                                </button>
-                            </a>
+                            <div>
+                                <a href="{{ route('user#cartListPage') }}">
+                                    <button type="button" class="btn btn-primary position-relative mr-3">
+                                        <i class="fa-solid fa-cart-shopping p-2"></i>
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge text-white rounded bg-info ">
+                                            <span class=" p-1">{{ count($totalOrder) }}</span>
+                                        </span>
+                                    </button>
+                                </a>
+                                <a href="{{ route('user#orderHistory') }}">
+                                    <button type="button" class="btn btn-primary position-relative">
+                                        <i class="fa-solid fa-clock-rotate-left p-2"></i>
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge text-white rounded bg-info ">
+                                            <span class=" p-1">{{count($orderHistory)}}</span>
+                                        </span>
+                                    </button>
+                                </a>
+                            </div>
                             <div class="ml-2">
                                 <select class=" form-control" id="sorting">
                                     <option value="">Choose one option</option>
@@ -54,32 +67,38 @@
                     </div>
 
                     <div id="listPage" class="row">
-                      @if (count($product) != 0)
-                        @foreach ($product as $p)
-                            <div class=" mx-3">
-                                <div class="product-item bg-light mb-4 " style=" width:300px;">
-                                    <div class="product-img position-relative overflow-hidden" style="">
-                                        <img class=" img-fluid w-100"  src="{{ asset('storage/' . $p->image) }}" alt=""
-                                            style="height:200px">
-                                        <div class="product-action">
-                                            <a class="btn btn-outline-dark btn-square" id="cartBtn" ><i
-                                                    class="fa fa-shopping-cart"></i></a>
-                                            <a  href="{{route("user#pizzaDetailPage",$p->id)}}" class="btn btn-outline-dark btn-square" ><i class="fa-solid fa-info"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="text-center py-4">
-                                        <h4 class=" text-info">{{ $p->name }} </h4>
-                                        <div class="d-flex align-items-center justify-content-center mt-2">
-                                            <h5>{{ $p->price }} kyats</h5>
-                                        </div>
+                        @if (count($product) != 0)
+                            @foreach ($product as $p)
+                                <div class=" mx-3">
 
+                                    <input type="hidden" name="" id="userId" value={{Auth::user()->id}}>
+                                    <input type="hidden" id="productId" value{{$p->id}}>
+                                    <input type="hidden" name="" id="quantity" value="{{$p->quantity}}">
+                                    <div class="product-item bg-light mb-4 " style=" width:300px;">
+                                        <div class="product-img position-relative overflow-hidden" style="">
+                                            <img class=" img-fluid w-100" src="{{ asset('storage/' . $p->image) }}"
+                                                alt="" style="height:200px">
+                                            <div class="product-action">
+                                                <a class="btn btn-outline-dark btn-square "><i
+                                                        class="fa fa-shopping-cart"></i></a>
+                                                <a href="{{ route('user#pizzaDetailPage', $p->id) }}"
+                                                    class="btn btn-outline-dark btn-square"><i
+                                                        class="fa-solid fa-info"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="text-center py-4">
+                                            <h4 class=" text-info">{{ $p->name }} </h4>
+                                            <div class="d-flex align-items-center justify-content-center mt-2">
+                                                <h5>{{ $p->price }} kyats</h5>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
-                      @else
-                    <p class=" text-dark text-center mt-5">There is no pizza!</p>
-                      @endif
+                        @else
+                            <p class=" text-dark text-center mt-5">There is no pizza!</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -91,18 +110,18 @@
 @section('scriptCode')
     <script>
         $(document).ready(function() {
-                $.ajax({
-                    type : 'get',
-                    url : 'http://127.0.0.1:8000/ajax/addToCart',
-                    data : status,
-                    dataType : 'json',
-                    success: function(response){
-                       if(response.status == 'success'){
-                            window.location.href = "http://127.0.0.1:8000/user/homePage";
-                       }
-                    }
 
-                });
+            $.ajax({
+                type: 'get',
+                url: 'http://127.0.0.1:8000/ajax/addToCart',
+                data: status,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status == 'success') {
+                        window.location.href = "http://127.0.0.1:8000/user/homePage";
+                    }
+                }
+
             });
 
             $('#sorting').change(function() {
@@ -137,7 +156,7 @@
                             </div>`;
 
                             };
-                        $('#listPage').html(data);
+                            $('#listPage').html(data);
                         }
                     });
                 } else if (sortingValue == 'dsc') {
@@ -150,7 +169,7 @@
                         dataType: 'json',
                         success: function(response) {
                             let data = '';
-                            for(let i=0;i<response.length;i++){
+                            for (let i = 0; i < response.length; i++) {
                                 data += `
                                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                                     <div class="product-item bg-light mb-4">
@@ -160,7 +179,7 @@
                                             <div class="product-action">
                                                 <a class="btn btn-outline-dark btn-square" href=""><i
                                                         class="fa fa-shopping-cart"></i></a>
-                                                
+
                                             </div>
                                         </div>
                                         <div class="text-center py-4">
@@ -173,17 +192,13 @@
                                     </div>
                                 </div>`;
                             };
-                        $('#listPage').html(data);
+                            $('#listPage').html(data);
                         }
                     });
 
 
                 };
-
-
-
             });
-
         });
     </script>
 

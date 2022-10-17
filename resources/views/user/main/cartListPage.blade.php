@@ -24,6 +24,7 @@
                             <tr>
                                 <input type="hidden" name="" value="{{$c->product_id}}" class="pId">
                                 <td class="align-middle ">{{ $c->pizzaName }}</td>
+
                                 <td class="align-middle price">{{ $c->pizzaPrice }} kyats</td>
                                 <input type="hidden" name="" class=" uId" value="{{$c->user_id}}">
                                 <td class="align-middle">
@@ -43,6 +44,7 @@
                                         </div>
                                     </div>
                                 </td>
+                                <input type="hidden" name="" value="{{$c->id}}" class="orderId">
                                 <td class="align-middle totalPrice">{{$c->pizzaPrice * $c->quantity}} kyats</td>
                                 <td class="align-middle"><button class="btn btn-sm btn-danger btnRemove"><i
                                             class="fa fa-times"></i></button></td>
@@ -51,6 +53,7 @@
 
                     </tbody>
                 </table>
+                
             </div>
             <div class="col-lg-4">
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
@@ -72,6 +75,7 @@
                             <h5 class=" fprice">{{$totalPrice + 3000}} kyats</h5>
                         </div>
                         <button class="btn btn-block btn-primary font-weight-bold my-3 py-3 proceedBtn">Proceed To Checkout</button>
+                        <button class="btn btn-block btn-danger font-weight-bold my-3 py-3 removeBtn">Remove All Order</button>
                     </div>
                 </div>
             </div>
@@ -102,9 +106,19 @@
             })
 
             $('.btnRemove').click(function(){
+
+                let orderId = $('.orderId').val();
+                let productId = $('.pId').val();
+                $.ajax({
+                    type : 'get',
+                    url : 'http://127.0.0.1:8000/ajax/cartItemRemove',
+                    data : {'orderId' : orderId ,'productId' : productId},
+                    dataType : 'json',
+                });
                 let parentNode = $(this).parents('tr');
                 parentNode.remove();
                 summaryTotal();
+
             })
 
             //get summary total
@@ -148,5 +162,25 @@
                     }
                 });
             });
+
+        //remove all order
+        $('.removeBtn').click(function(){
+           $('.dataTable tbody tr').remove();
+           $('.tprice').html('0 kyats');
+           $('.fprice').html('3000 kyats');
+
+           $.ajax({
+                    type : 'get',
+                    url : 'http://127.0.0.1:8000/ajax/cartRemove',
+                    dataType : 'json',
+                    success : function(response){
+                        if(response.status == 'success'){
+                            window.location.href = "http://127.0.0.1:8000/user/homePage";
+                        }
+
+                    }
+            });
+
+        })
      </script>
 @endsection

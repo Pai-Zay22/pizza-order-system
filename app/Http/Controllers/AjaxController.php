@@ -58,6 +58,22 @@ class AjaxController extends Controller
         return response()->json($response, 200);
     }
 
+    //cart remove
+    public function cartRemove(){
+        Cart::where('user_id',Auth::user()->id)->delete();
+        $response = [
+            'status' => 'success',
+        ];
+        return response()->json($response, 200);
+    }
+
+    //cart item remove
+    public function cartItemRemove(REQUEST $req){
+        Cart::where('user_id',Auth::user()->id)
+            ->where('product_id',$req->productId)
+            ->where('id',$req->orderId)->delete();
+    }
+
     //request order data
     private function requestOrderData(REQUEST $req){
         return [

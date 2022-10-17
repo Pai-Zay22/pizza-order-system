@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ class UserController extends Controller
         $product = Product::get();
         $category = Category::get();
         $totalOrder = Cart::where('user_id',Auth::user()->id)->get();
-        return view('user.main.home',compact('product','category','totalOrder'));
+        $orderHistory = Order::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('product','category','totalOrder','orderHistory'));
     }
 
     //filter by category
@@ -28,7 +30,8 @@ class UserController extends Controller
         $product = Product::where('category_id',$categoryId)->get();
         $category = Category::get();
         $totalOrder = Cart::where('user_id',Auth::user()->id)->get();
-        return view('user.main.home',compact('product','category','totalOrder'));
+        $orderHistory = Order::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('product','category','totalOrder','orderHistory'));
     }
 
     //direct pizza detail page
@@ -99,6 +102,12 @@ class UserController extends Controller
             $totalPrice += $c->pizzaPrice * $c->quantity;
         }
         return view('user.main.cartListPage',compact('cartListData','totalPrice'));
+    }
+
+    //direct order history page
+    public function orderHistory(){
+        $order = Order::where('user_id',Auth::user()->id)->orderBy('id','desc')->paginate('5');
+        return view('user.main.orderHistory',compact('order'));
     }
 
     //user data validation check
