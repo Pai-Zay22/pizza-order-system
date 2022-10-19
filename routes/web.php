@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\User\UserController;
@@ -57,6 +58,12 @@ Route::middleware('admin_auth')->group(function(){
        Route::get('pizzaUpdatePage/{id}',[ProductController::class,'pizzaUpdatePage'])->name('product#pizzaUpdatePage');
        Route::post('pizzaUpdate/{id}',[ProductController::class,'pizzaUpdate'])->name('product#pizzaUpdate');
     });
+
+    //admin->order list
+    Route::prefix('order')->group(function(){
+        Route::get('listPage',[OrderController::class,'listPage'])->name('order#listPage');
+        Route::get('ajaxStatus',[OrderController::class,'ajaxStatus'])->name('order#ajaxStatus');
+    });
 });
 
 //user
@@ -68,6 +75,7 @@ Route::middleware('user_auth')->group(function(){
         Route::get('homePage',[UserController::class,'homePage'])->name('user#homePage');
         Route::get('filter/{id}',[UserController::class,'filter'])->name('user#filter');
         Route::get('order/history',[UserController::class,'orderHistory'])->name('user#orderHistory');
+        Route::get('productId/{id}',[UserController::class,'productId'])->name('user#productId');
 
         //pizza
         Route::prefix('pizza')->group(function(){

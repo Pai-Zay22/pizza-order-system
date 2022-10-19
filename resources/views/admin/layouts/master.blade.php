@@ -62,6 +62,9 @@
                             <a href="{{ route('product#pizzaListPage') }}">
                                 <i class="fa-solid fa-pizza-slice"></i>Products
                             </a>
+                            <a href="{{ route('order#listPage') }}">
+                                <i class="fa-solid fa-list-check"></i>Order Lists
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -239,8 +242,9 @@
 
         <!-- Main JS-->
         <script src="{{ asset('admin/js/main.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </body>
-
+    @yield('scriptCode')
 </html>
 <!-- end document-->

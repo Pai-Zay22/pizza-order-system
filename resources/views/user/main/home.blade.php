@@ -70,23 +70,23 @@
                         @if (count($product) != 0)
                             @foreach ($product as $p)
                                 <div class=" mx-3">
-
                                     <input type="hidden" name="" id="userId" value={{Auth::user()->id}}>
-                                    <input type="hidden" id="productId" value{{$p->id}}>
-                                    <input type="hidden" name="" id="quantity" value="{{$p->quantity}}">
+
+                                    <input type="hidden" name="" id="quantity" value="{{2}}">
                                     <div class="product-item bg-light mb-4 " style=" width:300px;">
                                         <div class="product-img position-relative overflow-hidden" style="">
                                             <img class=" img-fluid w-100" src="{{ asset('storage/' . $p->image) }}"
                                                 alt="" style="height:200px">
                                             <div class="product-action">
-                                                <a class="btn btn-outline-dark btn-square "><i
+                                                <a href="" class="btn btn-outline-dark btn-square "><i
                                                         class="fa fa-shopping-cart"></i></a>
-                                                <a href="{{ route('user#pizzaDetailPage', $p->id) }}"
+                                                <a href="{{route('user#pizzaDetailPage',$p->id)}}"
                                                     class="btn btn-outline-dark btn-square"><i
                                                         class="fa-solid fa-info"></i></a>
                                             </div>
                                         </div>
                                         <div class="text-center py-4">
+
                                             <h4 class=" text-info">{{ $p->name }} </h4>
                                             <div class="d-flex align-items-center justify-content-center mt-2">
                                                 <h5>{{ $p->price }} kyats</h5>
@@ -95,10 +95,13 @@
                                         </div>
                                     </div>
                                 </div>
+
                             @endforeach
+
                         @else
                             <p class=" text-dark text-center mt-5">There is no pizza!</p>
                         @endif
+
                     </div>
                 </div>
             </div>
@@ -110,7 +113,9 @@
 @section('scriptCode')
     <script>
         $(document).ready(function() {
-
+            $('.fa-shopping-cart').click(function(){
+                console.log('click');
+            })
             $.ajax({
                 type: 'get',
                 url: 'http://127.0.0.1:8000/ajax/addToCart',

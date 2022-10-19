@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     //direct user home page
-    public function homePage(){
+    public function homePage(REQUEST $req){
         $product = Product::get();
         $category = Category::get();
         $totalOrder = Cart::where('user_id',Auth::user()->id)->get();
@@ -31,7 +31,7 @@ class UserController extends Controller
         $category = Category::get();
         $totalOrder = Cart::where('user_id',Auth::user()->id)->get();
         $orderHistory = Order::where('user_id',Auth::user()->id)->get();
-        return view('user.main.home',compact('product','category','totalOrder','orderHistory'));
+        return view('user.main.home',compact('product','category','totalOrder','orderHistory','pizza'));
     }
 
     //direct pizza detail page
@@ -63,6 +63,12 @@ class UserController extends Controller
         }
 
     }
+
+    //get product id
+    // public function productId($productId){
+    //     $pId = Product::where('id',$productId)->first();
+    //     return view('user.main.home',compact('pId'));
+    // }
 
     //direct user account update page
     public function accountUpdatePage(){

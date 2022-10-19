@@ -29,7 +29,7 @@
                                         <span class=" text-warning"><i class="fa-solid fa-clock mr-2"></i>Pending...</span>
                                     @elseif ($o->status == 1)
                                         <span class=" text-success"><i class="fa-solid fa-clock mr-2"></i>Success</span>
-                                    @else
+                                    @elseif($o->status == 2)
                                         <span class=" text-danger"><i class="fa-solid fa-circle-xmark mr-2"></i>Reject</span>
                                     @endif
                                 </td>
