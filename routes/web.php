@@ -43,9 +43,8 @@ Route::middleware('admin_auth')->group(function(){
         Route::get('accountEditPage',[AdminController::class,'accountEditPage'])->name('admin#accountEditPage');
         Route::post('accountUpdate/{id}',[AdminController::class,'accountUpdate'])->name('admin#accountUpdate');
         Route::get('listPage',[AdminController::class,'adminListPage'])->name('admin#listPage');
-        Route::delete('delete/{id}',[AdminController::class,'adminListDelete'])->name('admin#listDelete');
-        Route::get('roleChangePage/{id}',[AdminController::class,'roleChangePage'])->name('admin#roleChangePage');
-        Route::post('roleChange/{id}',[AdminController::class,'roleChange'])->name('admin#roleChange');
+        Route::get('ajax/role/change',[AdminController::class,'ajaxRoleChange'])->name('admin#ajaxRoleChange');
+
     });
 
     //admin->product
@@ -62,7 +61,8 @@ Route::middleware('admin_auth')->group(function(){
     //admin->order list
     Route::prefix('order')->group(function(){
         Route::get('listPage',[OrderController::class,'listPage'])->name('order#listPage');
-        Route::get('ajaxStatus',[OrderController::class,'ajaxStatus'])->name('order#ajaxStatus');
+        Route::get('change/main/status',[OrderController::class,'changeMainStatus'])->name('order#changeMainStatus');
+        Route::get('ajax/change/status',[OrderController::class,'ajaxChangeStatus'])->name('order#ajaxChangeStatus');
     });
 });
 

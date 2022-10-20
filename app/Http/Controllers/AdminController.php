@@ -80,31 +80,12 @@ class AdminController extends Controller
         return view('admin.account.adminListPage',compact('admin'));
     }
 
-    //delete admin list
-    public function adminListDelete($id){
-        User::where('id',$id)->delete();
-        return back();
-    }
-
-    //direct admin role change page
-    public function roleChangePage($id){
-        $data = User::where('id',$id)->first();
-        // dd($data->toArray());
-        return view('admin.account.adminRoleChange',compact('data'));
-    }
-
-    // admin role change process
-    public function roleChange($id,REQUEST $req){
-        $data = $this->roleChangeData($req);
-        User::where('id',$id)->update($data);
-        return redirect()->route('admin#listPage');
-    }
-
-    //requesting role change data
-    private function roleChangeData($req){
-        return[
-            'role' => $req->role,
-        ];
+    //ajax admin role change
+    public function ajaxRoleChange(REQUEST $req){
+       $status = User::where('id',$req->adminId)
+                ->update([
+                    'role' => $req->status,
+                ]);
     }
     //requesting user data
     private function getUserData($req){

@@ -21,8 +21,8 @@ class OrderController extends Controller
         return view('admin.order.list',compact('order'));
     }
 
-    //ajax order status
-    public function ajaxStatus(REQUEST $req){
+    //change main status
+    public function changeMainStatus(REQUEST $req){
         $order = Order::select('orders.*','users.name as user_name')
                 ->leftJoin('users','orders.user_id','users.id')
                 ->orderBy('created_at','desc');
@@ -31,6 +31,14 @@ class OrderController extends Controller
         }else{
             $order = $order->where('orders.status',$req->status)->get();
         }
-        return response()->json($order, 200);
+        return view('admin.order.list',compact('order'));
+    }
+
+    //ajax change status
+    public function ajaxChangeStatus(REQUEST $req){
+        $changeStatus = Order::where('id',$req->orderId)
+                        ->update([
+                            'status' => $req->status,
+                        ]);
     }
 }
