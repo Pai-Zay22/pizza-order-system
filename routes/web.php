@@ -63,6 +63,7 @@ Route::middleware('admin_auth')->group(function(){
         Route::get('listPage',[OrderController::class,'listPage'])->name('order#listPage');
         Route::get('change/main/status',[OrderController::class,'changeMainStatus'])->name('order#changeMainStatus');
         Route::get('ajax/change/status',[OrderController::class,'ajaxChangeStatus'])->name('order#ajaxChangeStatus');
+        Route::get('list/info/{orderCode}',[OrderController::class,'listInfoPage'])->name('order#listInfoPage');
     });
 });
 

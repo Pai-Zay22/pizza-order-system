@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderList;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -40,5 +41,15 @@ class OrderController extends Controller
                         ->update([
                             'status' => $req->status,
                         ]);
+    }
+
+    //direct order list info page
+    public function listInfoPage($orderCode){
+        $orderList = OrderList::where('order_code',$orderCode)
+                    ->select('order_lists.*','users.name as user_name','products.name as product_name','products.image as product_image')
+                    ->leftJoin('users','users.id','order_lists.user_id')
+                    ->leftJoin('products','products.id','order_lists.product_id')
+                    ->get();
+        return view('admin.order.listInfo',compact('orderList'));
     }
 }

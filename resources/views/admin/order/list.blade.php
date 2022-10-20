@@ -74,9 +74,13 @@
                                     <tr class="tr-shadow">
                                         <input type="hidden" name="" id="orderId" value="{{$o->id}}">
                                         <td>{{ $o->user_id }}</td>
-                                        <td class=" text-primary">{{ $o->user_name }}</td>
+                                        <td >{{ $o->user_name }}</td>
                                         <td>{{ $o->created_at->format('j.F.Y') }}</td>
-                                        <td>{{ $o->order_code }}</td>
+
+                                        <td class=" text-primary"><a href="{{route('order#listInfoPage',$o->order_code)}}">
+                                        {{$o->order_code}}
+                                        </a></td>
+
                                         <td>{{ $o->total_price }} kyats</td>
                                         <td>
                                             <select name="" class="form-select orderStatus " aria-label="Filter select">
