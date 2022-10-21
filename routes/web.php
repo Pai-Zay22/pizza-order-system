@@ -103,6 +103,7 @@ Route::middleware('user_auth')->group(function(){
         Route::get('orderList',[AjaxController::class,'orderList'])->name('ajax#orderList');
         Route::get('cartRemove',[AjaxController::class,'cartRemove'])->name('ajax#cartRemove');
         Route::get('cartItemRemove',[AjaxController::class,'cartItemRemove'])->name('ajax#cartItemRemove');
+        Route::get('increase/view',[AjaxController::class,'increaseView'])->name('ajax#increaseView');
     });
 
 });

@@ -26,7 +26,7 @@
                     <h3 class=" text-success">{{$pizza->name}}</h3>
                     <input type="hidden" id="productId" name="" value="{{$pizza->id}}">
                     <input type="hidden" id="userId" name="" value="{{Auth::user()->id}}">
-                    <div><i class="fa-solid fa-eye mr-2 my-2"></i>{{$pizza->view_count}}</div>
+                    <div><i class="fa-solid fa-eye mr-2 my-2"></i>{{$pizza->view_count + 1}}</div>
                     <h5 class="font-weight-semi-bold mb-4">{{$pizza->price}} kyats</h5>
                     <p class=" mb-3">{{$pizza->description}}</p>
                     <div class="d-flex align-items-center mb-4 pt-2">
@@ -89,7 +89,7 @@
                         <div class="text-center py-4">
                             <a class="h6 text-decoration-none text-truncate text-success " href="">{{$list->name}}</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>{{$list->price}}</h5>
+                                <h5>{{$list->price}} kyats</h5>
                             </div>
                         </div>
                     </div>
@@ -104,10 +104,22 @@
 @section('scriptCode')
     <script>
         $(document).ready(function(){
+            //increase view count
+            let pId = $('#productId').val();
+            $.ajax({
+                    type : 'get',
+                    url : 'http://127.0.0.1:8000/ajax/increase/view',
+                    data : {'pId' : pId },
+                    dataType : 'json',
+                });
+
+            //click add to cart button
             $('#cartBtn').click(function(){
+
                 let quantity = $('#quantity').val();
                 let userId = $('#userId').val();
-                let productId = $('#productId').val();
+                let  productId = $('#productId').val();
+
                 let status = {
                     'userId' : userId,
                     'productId' : productId,
