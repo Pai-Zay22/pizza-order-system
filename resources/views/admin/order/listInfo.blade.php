@@ -19,6 +19,7 @@
                   <li class="list-group-item mt-2"> Customer Name = <span class=" text-primary"> {{$orderList[0]->user_name}}</span></li>
                   <li class="list-group-item mt-2">Order Code = <span class=" text-primary">{{$orderList[0]->order_code}}</span> </li>
                   <li class="list-group-item mt-2">Order Date = <span class=" text-primary">{{$orderList[0]->created_at->format('F | j | Y')}}</span> <li>
+                    <li class="list-group-item mt-2">Total Amount = <span class=" text-primary">{{$order->total_price}} kyats</span> <li>
                 </ul>
               </div>
             <div class="container-fluid">

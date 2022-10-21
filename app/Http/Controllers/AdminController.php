@@ -80,13 +80,27 @@ class AdminController extends Controller
         return view('admin.account.adminListPage',compact('admin'));
     }
 
-    //ajax admin role change
+   //ajax admin role change
     public function ajaxRoleChange(REQUEST $req){
        $status = User::where('id',$req->adminId)
                 ->update([
                     'role' => $req->status,
                 ]);
     }
+
+      //direct user list page
+    public function userList(){
+        $user = User::where('role','user')->get();
+        return view('admin.user.list',compact('user'));
+    }
+
+    //ajax user role change
+    public function userRoleChange(REQUEST $req){
+        $status = User::where('id',$req->userId)
+                 ->update([
+                     'role' => $req->status,
+                 ]);
+     }
     //requesting user data
     private function getUserData($req){
         return[

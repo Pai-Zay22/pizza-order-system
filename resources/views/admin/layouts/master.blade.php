@@ -60,10 +60,13 @@
                                 <i class="fas fa-list"></i>Category List
                             </a>
                             <a href="{{ route('product#pizzaListPage') }}">
-                                <i class="fa-solid fa-pizza-slice"></i>Products
+                                <i class="fa-solid fa-pizza-slice"></i>Product List
                             </a>
                             <a href="{{ route('order#listPage') }}">
-                                <i class="fa-solid fa-list-check"></i>Order Lists
+                                <i class="fa-solid fa-list-check"></i>Order List
+                            </a>
+                            <a href="{{ route('admin#userListPage') }}">
+                                <i class="fa-solid fa-users"></i>User List
                             </a>
                         </li>
                     </ul>

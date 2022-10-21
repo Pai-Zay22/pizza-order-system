@@ -65,6 +65,10 @@ Route::middleware('admin_auth')->group(function(){
         Route::get('ajax/change/status',[OrderController::class,'ajaxChangeStatus'])->name('order#ajaxChangeStatus');
         Route::get('list/info/{orderCode}',[OrderController::class,'listInfoPage'])->name('order#listInfoPage');
     });
+
+    //admin->user list
+    Route::get('user/listPage',[AdminController::class,'userList'])->name('admin#userListPage');
+    Route::get('ajax/user/role/change',[AdminController::class,'userRoleChange']);
 });
 
 //user

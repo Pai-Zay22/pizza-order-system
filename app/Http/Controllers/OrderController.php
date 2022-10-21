@@ -45,11 +45,12 @@ class OrderController extends Controller
 
     //direct order list info page
     public function listInfoPage($orderCode){
+        $order = Order::where('order_code',$orderCode)->first();
         $orderList = OrderList::where('order_code',$orderCode)
                     ->select('order_lists.*','users.name as user_name','products.name as product_name','products.image as product_image')
                     ->leftJoin('users','users.id','order_lists.user_id')
                     ->leftJoin('products','products.id','order_lists.product_id')
                     ->get();
-        return view('admin.order.listInfo',compact('orderList'));
+        return view('admin.order.listInfo',compact('orderList','order'));
     }
 }
