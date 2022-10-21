@@ -55,8 +55,7 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="{{ route('user#homePage') }}" class="nav-item nav-link active">Home</a>
-                                {{-- <a href="cart.html" class="nav-item nav-link">My Cart</a>
-                                <a href="contact.html" class="nav-item nav-link">Contact</a> --}}
+                                <a href="{{route('user#contactPage')}}" class="nav-item nav-link">Contact Us</a>
                             </div>
                         </div>
 

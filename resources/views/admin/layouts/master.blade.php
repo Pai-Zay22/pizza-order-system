@@ -68,6 +68,9 @@
                             <a href="{{ route('admin#userListPage') }}">
                                 <i class="fa-solid fa-users"></i>User List
                             </a>
+                            <a href="{{ route('admin#contact') }}">
+                                <i class="fa-solid fa-message"></i>Contact Message
+                            </a>
                         </li>
                     </ul>
                 </nav>

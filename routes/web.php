@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\User\UserController;
@@ -69,6 +70,9 @@ Route::middleware('admin_auth')->group(function(){
     //admin->user list
     Route::get('user/listPage',[AdminController::class,'userList'])->name('admin#userListPage');
     Route::get('ajax/user/role/change',[AdminController::class,'userRoleChange']);
+
+    //admin->contact message
+    Route::get('contact/message',[AdminController::class,'contactMessage'])->name('admin#contact');
 });
 
 //user
@@ -81,6 +85,8 @@ Route::middleware('user_auth')->group(function(){
         Route::get('filter/{id}',[UserController::class,'filter'])->name('user#filter');
         Route::get('order/history',[UserController::class,'orderHistory'])->name('user#orderHistory');
         Route::get('productId/{id}',[UserController::class,'productId'])->name('user#productId');
+        Route::get('contact/page',[ContactController::class,'contactPage'])->name('user#contactPage');
+        Route::post('contact/send',[ContactController::class,'contactSend'])->name('user#contactSend');
 
         //pizza
         Route::prefix('pizza')->group(function(){

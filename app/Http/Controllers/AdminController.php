@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -101,6 +102,12 @@ class AdminController extends Controller
                      'role' => $req->status,
                  ]);
      }
+
+     //direct contact message page
+    public function contactMessage(){
+        $message = Contact::get();
+        return view('admin.message.list',compact('message'));
+    }
     //requesting user data
     private function getUserData($req){
         return[
